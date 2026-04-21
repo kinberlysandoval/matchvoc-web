@@ -1,14 +1,12 @@
 <?php
-$host = "monorail.proxy.rlwy.net";
-$port = 54392;
-$user = "root";
-$password = "VuWMrBHouQPJVpfqwzbRNhmJfVICjVgM";
-$database = "railway";
+$host     = getenv('DB_HOST');
+$usuario  = getenv('DB_USER');
+$password = getenv('DB_PASS');
+$base     = getenv('DB_NAME');
 
-$conn = mysqli_connect($host, $user, $password, $database, $port);
+$conn = new mysqli($host, $usuario, $password, $base);
 
-if (!$conn) {
-    die("Error de conexión: " . mysqli_connect_error());
+if ($conn->connect_error) {
+    die("Error de conexión: " . $conn->connect_error);
 }
-$conexion = $conn;
 ?>
