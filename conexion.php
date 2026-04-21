@@ -1,7 +1,14 @@
-providers = ["php"]
+<?php
+$host     = getenv('DB_HOST') ?: getenv('MYSQLHOST') ?: 'localhost';
+$usuario  = getenv('DB_USER') ?: getenv('MYSQLUSER') ?: 'root';
+$password = getenv('DB_PASS') ?: getenv('MYSQLPASSWORD') ?: '';
+$base     = getenv('DB_NAME') ?: getenv('MYSQLDATABASE') ?: 'railway';
+$port     = getenv('DB_PORT') ?: getenv('MYSQLPORT') ?: 3306;
 
-[phases.setup]
-nixPkgs = ["php82", "php82Extensions.mysqli", "php82Extensions.pdo_mysql"]
+$conn = new mysqli($host, $usuario, $password, $base, $port);
 
-[start]
-cmd = "php -S 0.0.0.0:$PORT"
+if ($conn->connect_error) {
+    die("Error de conexión: " . $conn->connect_error);
+}
+$conexion = $conn;
+?>
