@@ -1,12 +1,8 @@
-<?php
-$host     = getenv('DB_HOST');
-$usuario  = getenv('DB_USER');
-$password = getenv('DB_PASS');
-$base     = getenv('DB_NAME');
+[phases.setup]
+nixPkgs = ["php82", "php82Extensions.mysqli", "php82Extensions.pdo", "php82Extensions.pdo_mysql"]
 
-$conn = new mysqli($host, $usuario, $password, $base);
+[phases.build]
+cmds = []
 
-if ($conn->connect_error) {
-    die("Error de conexión: " . $conn->connect_error);
-}
-?>
+[start]
+cmd = "php -S 0.0.0.0:$PORT -t /app"
