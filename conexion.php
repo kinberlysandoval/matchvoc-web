@@ -1,8 +1,7 @@
-[phases.setup]
-nixPkgs = ["php82", "php82Extensions.mysqli", "php82Extensions.pdo", "php82Extensions.pdo_mysql"]
+providers = ["php"]
 
-[phases.build]
-cmds = []
+[phases.setup]
+nixPkgs = ["php82", "php82Extensions.mysqli", "php82Extensions.pdo_mysql"]
 
 [start]
-cmd = "php -S 0.0.0.0:$PORT -t /app"
+cmd = "php -S 0.0.0.0:$PORT"
